@@ -133,7 +133,22 @@ module.exports.processEditPage = (req, res, next) => {
 
 // Deletes a book based on its id.
 module.exports.performDelete = (req, res, next) => {
-    
-    // ADD YOUR CODE HERE
+
+    let id = req.params.id;
+
+
+    Book.remove({_id: id}, (err) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            // refresh the book list
+            res.redirect('/book/list');
+        }
+    });
+
 }
 
